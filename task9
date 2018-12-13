@@ -9,7 +9,7 @@ int main() {
     bool n = true;
 
     default_random_engine generator;
-    uniform_int_distribution<int> distribution(1,9);
+    uniform_int_distribution<int> distribution(2,11);
 
     while(n) {
         playerScore+=distribution(generator);
@@ -25,13 +25,16 @@ int main() {
         }
     }
     
-    dealerScore = distribution(generator) * 9;
+    dealerScore = distribution(generator) * 5;
 
-    if(playerScore <= 21 && playerScore > dealerScore) {
+    if(playerScore <= 21 && playerScore > dealerScore && dealerScore <= 21) {
         cout<<"You win!\nYour score: "<<playerScore<<"\nDealer score: "<<dealerScore<<"\n";
     }
     else {
         cout<<"You lose\nYour score: "<<playerScore<<"\nDealer score: "<<dealerScore<<"\n";
+    }
+    if(playerScore <= 21 && dealerScore > 21) {
+        cout<<"You win!\nYour score: "<<playerScore<<"\nDealer score: "<<dealerScore<<"\n";
     }
 
     return 0;
