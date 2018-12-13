@@ -1,0 +1,31 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    
+    int N;
+    int arr[N];
+    int min = arr[0];
+    int max = arr[0];
+    
+    cin>>N;
+    
+    for (int i=0;i<N;i++){
+        cin>>arr[i];
+    }
+    
+    for (int i=0; i<N;i++){
+        if (min>arr[i]){
+            min = arr[i];
+        }
+        
+        else if (max<arr[i]){
+            max = arr[i];
+        }
+    }
+    
+    cout<<"minimal = "<<min<<'\n'<<"maximal = "<<max<<endl;
+    
+    return 0;
+}
