@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <stdio.h>
+#define SIZE 256
 
 using namespace std;
 
@@ -11,16 +13,19 @@ int findIncoming(char *str, char symbol){
       count++;
     }
   }
+  cout<<"\n";
   return count;
 }
 
 int main(){
-  char str[20];
+  char str[SIZE];
   char symbol;
   cout<<"Enter the string:\n";
-  cin>>str;
+  fgets(str, SIZE, stdin);
+  /*cout<<"Enter the string:\n";
+  cin>>str;*/
   cout<<"Enter the symbol:\n";
-  cin>>symbol;
+  scanf("%c", &symbol);
   cout<<"Number of incoming: "<<findIncoming(str, symbol);
 
   return 0;
