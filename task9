@@ -1,40 +1,110 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <random>
+#include <vector>
 
 using namespace std;
 
 int main() {
-    int playerScore = 0;
-    int dealerScore = 0;
-    bool n = true;
+    int player = 0;
+    int dealer = 0;
 
-    default_random_engine generator;
-    uniform_int_distribution<int> distribution(2,11);
+    bool flag = true;
+    
+    vector<int> playerCard;
+    mt19937 generator(time(0));
+    uniform_int_distribution<int> distribution(2,14);
 
-    while(n) {
-        playerScore+=distribution(generator);
-        cout<<"Your score: "<<playerScore<<endl<<"Draw a card? Yes:1 / No:0"<<endl;
-        int check;
-        cin>>check;
-        switch(check) {
-            case 1:
-                break;
+    int card;
+
+    while(flag) {
+        card = distribution(generator);
+        playerCard.push_back(card);
+        if(card==11) {
+            player += 2;
+        }
+        else if(card == 12) {
+            player += 3;
+        }
+        else if(card == 13) {
+            player += 4;
+        }
+        else if(card == 14) {
+            player+= 11;
+        }
+        else {
+            player += card;
+        }
+        
+        for(int i = 0; i < playerCard.size(); i++) {
+            switch(playerCard[i]) {
+                case 2:
+                    cout << "2 ";
+                    break;
+                case 3:
+                    cout << "3 ";
+                    break;
+                case 4:
+                    cout << "4 ";
+                    break;
+                case 5:
+                    cout << "5 ";
+                    break;
+                case 6:
+                    cout << "6 ";
+                    break;
+                case 7:
+                    cout << "7 ";
+                    break;
+                case 8:
+                    cout << "8 ";
+                    break;
+                case 9:
+                    cout << "9 ";
+                    break;
+                case 10:
+                    cout << "10 ";
+                    break;
+                case 11:
+                    cout << "J ";
+                    break;
+                case 12:
+                    cout << "Q ";
+                    break;
+                case 13:
+                    cout << "K ";
+                    break;
+                case 14:
+                    cout << "A ";
+                    break;               
+            }
+            
+        }    
+        cout << endl << "Your score: " << player << 
+            endl << "One more? Yes: 1 / No: 0" << endl;
+
+        int button;
+        cin >> button;
+        switch(button) {
             case 0:
-                n = false;
+                flag = false;
                 break;        
         }
     }
-    
-    dealerScore = distribution(generator) * 5;
 
-    if(playerScore <= 21 && playerScore > dealerScore && dealerScore <= 21) {
-        cout<<"You win!\nYour score: "<<playerScore<<"\nDealer score: "<<dealerScore<<"\n";
+    while(true) {
+        dealer += distribution(generator);
+        if(dealer >= 15) {
+            break;
+        }
+    }
+
+    if(player <= 21 && player > dealer || dealer > 21 && player < 21) {
+        cout << "You win\nYour score: " << player << "\nBank score: " << dealer << "\n";
     }
     else {
-        cout<<"You lose\nYour score: "<<playerScore<<"\nDealer score: "<<dealerScore<<"\n";
-    }
-    if(playerScore <= 21 && dealerScore > 21) {
-        cout<<"You win!\nYour score: "<<playerScore<<"\nDealer score: "<<dealerScore<<"\n";
+        cout << "You lose\nYour score: " << player << "\nBank score: " << dealer << "\n";    
     }
 
     return 0;
